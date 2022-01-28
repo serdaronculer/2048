@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,19 +8,44 @@
     <link rel="stylesheet" href="style.css">
     <title>2048</title>
 </head>
-<body>
-    
-    <div class="container">
-        <div class="score">0</div>
-        <div class="grid">
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
-        </div>
-    </div>
-    
 
- <script src="app.js"></script>
+<body>
+
+    <div class="container">
+        <div class="board-container">
+            <div class="header2048">
+                <div class="content">
+                    <div>2048</div>
+                    <div>Join the tiles, get to <b>2048!</b></div>
+                </div>
+                <div class="board">
+                    <div class="score-board">
+                        <div>
+                            <div>SCORE</div>
+                            <div class="score">0</div>       
+                        </div>
+                        <div>
+                            <div>BEST</div>
+                            <div class="best-score">0</div>
+                        </div>
+                    </div>
+                    <div class="new-game">New Game</div>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="row"></div>
+                <div class="row"></div>
+                <div class="row"></div>
+                <div class="row"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="app.js"></script>
 </body>
+
 </html>

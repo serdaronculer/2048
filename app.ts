@@ -104,7 +104,11 @@ function valueGenerator() {
         let selectedBlock = selectedRow.children[randomNumberGenarate(4)];
  
         if (selectedBlock.children.length < 1) {
-            selectedBlock.appendChild(createCell());
+            let cell = createCell();
+            selectedBlock.appendChild(cell);
+            setTimeout(function () {
+                cell.style.opacity="1";
+            },0.8);
             break;
         }
 
@@ -138,6 +142,10 @@ function createCell(): HTMLDivElement {
     cell.classList.add("cell");
     cell.style.color="#776E65";
     cell.style.background = "#EEE4DA";
+    cell.style.fontWeight="bold";
+    cell.style.opacity="0.2";
+    cell.style.margin="auto";
+    cell.style.transition="1s opacity";
     cell.innerHTML = randomNumber[index].toString();
     return cell;
 
@@ -440,8 +448,9 @@ function cellColor(number,cell){
         case 128 : cell.style.background ="#EDD073";
                    cell.style.textShadow = "rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 10px";
         break;
-        case 256 : cell.style.background = "#EDCC62";
+        case 256 || 512 || 1024 || 2048 : cell.style.background = "#EDCC62";
                    cell.style.textShadow ="0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #EDCC62, 0 0 30px #EDCC62, 0 0 40px #EDCC62, 0 0 55px #EDCC62";
+                
     }
 }
 
