@@ -1,12 +1,16 @@
 const rows = document.querySelectorAll(".row");
 const score = document.querySelector(".score");
+const newGameButton = document.querySelector(".new-game") ;
+const end = document.querySelector(".end") as HTMLElement;
+const point = document.querySelector(".point");
+const restart = document.querySelector(".restart") as HTMLElement;
 
 enum arrowKey { "ArrowDown" = 40, "ArrowUp" = 38, "ArrowLeft" = 37, "ArrowRight" = 39 };
 
 
 
 document.addEventListener("keydown", function (e) {
-    if(e.keyCode == arrowKey.ArrowLeft){
+    if(e.keyCode == arrowKey.ArrowLeft && end.style.display =="none"){
         let blockArray = [];
         const blocks = document.querySelectorAll(".block");
         blocks.forEach((item) =>{
@@ -23,7 +27,7 @@ document.addEventListener("keydown", function (e) {
         valueGenerator();
      }
     }
-    if(e.keyCode == arrowKey.ArrowUp){
+    if(e.keyCode == arrowKey.ArrowUp  && end.style.display =="none"){
         let blockArray = [];
         const blocks = document.querySelectorAll(".block");
         blocks.forEach((item) =>{
@@ -40,7 +44,7 @@ document.addEventListener("keydown", function (e) {
         valueGenerator();
      }
     }
-    if(e.keyCode == arrowKey.ArrowDown){
+    if(e.keyCode == arrowKey.ArrowDown  && end.style.display =="none"){
         let blockArray = [];
         const blocks = document.querySelectorAll(".block");
         blocks.forEach((item) =>{
@@ -57,7 +61,7 @@ document.addEventListener("keydown", function (e) {
         valueGenerator();
      }
     }
-    if(e.keyCode == arrowKey.ArrowRight){
+    if(e.keyCode == arrowKey.ArrowRight  && end.style.display =="none"){
         let blockArray = [];
         const blocks = document.querySelectorAll(".block");
         blocks.forEach((item) =>{
@@ -75,7 +79,7 @@ document.addEventListener("keydown", function (e) {
      }
     }
     
-    
+    gameOverCheck();
      
 });
 
@@ -154,15 +158,12 @@ function createCell(): HTMLDivElement {
  function moveLeft(){
      
    let rowsArray  = rowsArrayXFunc();
-        console.log(rowsArray);
   
         let flag = 0;     
         
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 3; j++) {
                 if((rowsArray[i])[0]=="" && (rowsArray[i])[j+1]!=""){
-                    console.log((rowsArray[i])[j+1]);
-                    console.log((rows[i]).children[j+1]);
                     let cell =  ((rows[i]).children[j+1]).children[0];
                     cell.remove();
                     ((rows[i]).children[0]).appendChild(cell);   
@@ -180,8 +181,6 @@ function createCell(): HTMLDivElement {
         for (let i = 0; i < 4; i++) {
             for (let j = 1; j < 3; j++) {
                 if((rowsArray[i])[1]=="" && (rowsArray[i])[j+1]!=""){
-                    console.log((rowsArray[i])[j+1]);
-                    console.log((rows[i]).children[j+1]);
                     let cell =  ((rows[i]).children[j+1]).children[0];
                     cell.remove();
                     ((rows[i]).children[1]).appendChild(cell);   
@@ -199,8 +198,6 @@ function createCell(): HTMLDivElement {
         for (let i = 0; i < 4; i++) {
             for (let j = 2; j < 3; j++) {
                 if((rowsArray[i])[2]=="" && (rowsArray[i])[j+1]!=""){
-                    console.log((rowsArray[i])[j+1]);
-                    console.log((rows[i]).children[j+1]);
                     let cell =  ((rows[i]).children[j+1]).children[0];
                     cell.remove();
                     ((rows[i]).children[2]).appendChild(cell);   
@@ -382,7 +379,6 @@ function moveDown(){
     for (let i = 1; i > 0; i--) {
         for (let j = 0; j <4; j++){
             for (let k = 0; k >= 0; k--) {
-                console.log("len");
                 
                 if(rowsArray[i][j]=="" && rowsArray[k][j]!=""){
                     
@@ -414,7 +410,6 @@ function leftInsertBlock(){
             
             let cell =  ((rows[i]).children[j+1]).children[0];
             cell.remove();
-            console.log(((rows[i]).children[j]).children[0]);
             let newCell:HTMLDivElement = ((rows[i]).children[j]).children[0] as HTMLDivElement;
             let number  =  parseInt(newCell.textContent);
             
@@ -542,7 +537,7 @@ function downInsertBlock(){
     return flagII;
 }
 
-function rowsArrayXFunc(){
+function rowsArrayXFunc(): string[]{
     let rowsArray = [];
     for (let i = 0; i < 4; i++) {
         let XLocation = []; 
@@ -556,3 +551,67 @@ function rowsArrayXFunc(){
     }
     return rowsArray;
 }
+
+function gameOverCheck(){
+
+    let blockArray = [];
+    const blocks = document.querySelectorAll(".block");
+    blocks.forEach((item) =>{
+          blockArray.push(item);       
+    });
+
+    let notEmpty:boolean  = blockArray.every((item) => item.children.length>0);
+    let rowsArray : string[]  = rowsArrayXFunc();
+    let control = false;
+    for(let i=0; i<4; i++){
+        if(control)break;
+        for(let j = 0; j<3; j++){
+          if(rowsArray[i][j] == rowsArray[i][j+1] && rowsArray[i][j] !=""){
+            console.log(rowsArray[i][j]); 
+              control = true;
+                  
+              break;
+          }  
+        }
+    }
+
+    if(!control){
+
+        for(let i=0; i<4; i++){
+            if(control) break;
+              for(let j = 0; j<3; j++){
+                  if(rowsArray[j][i] != "" && rowsArray[j][i] == rowsArray[j+1][i]){
+                    console.log(rowsArray[j][i]);
+                    control = true;
+                  }
+              }
+          }
+    }
+ 
+    if(!control && notEmpty){
+        end.style.display="flex";
+        newGame();
+        restart.addEventListener("click", function(){       
+            end.style.display = "none";
+            
+        });
+    }
+}
+
+   
+    newGameButton.addEventListener("click",newGame)
+
+    function newGame(){
+        point.textContent = `Point : ${score.textContent}`;
+        score.textContent = "0";
+        const blocks = document.querySelectorAll(".block");
+
+        blocks.forEach((item) =>{
+            if(item.children.length>0)
+            item.children[0].remove();
+
+        });
+        
+        valueGenerator();
+    }
+  

@@ -1,5 +1,9 @@
 var rows = document.querySelectorAll(".row");
 var score = document.querySelector(".score");
+var newGameButton = document.querySelector(".new-game");
+var end = document.querySelector(".end");
+var point = document.querySelector(".point");
+var restart = document.querySelector(".restart");
 var arrowKey;
 (function (arrowKey) {
     arrowKey[arrowKey["ArrowDown"] = 40] = "ArrowDown";
@@ -9,7 +13,7 @@ var arrowKey;
 })(arrowKey || (arrowKey = {}));
 ;
 document.addEventListener("keydown", function (e) {
-    if (e.keyCode == arrowKey.ArrowLeft) {
+    if (e.keyCode == arrowKey.ArrowLeft && end.style.display == "none") {
         var blockArray_1 = [];
         var blocks = document.querySelectorAll(".block");
         blocks.forEach(function (item) {
@@ -22,7 +26,7 @@ document.addEventListener("keydown", function (e) {
             valueGenerator();
         }
     }
-    if (e.keyCode == arrowKey.ArrowUp) {
+    if (e.keyCode == arrowKey.ArrowUp && end.style.display == "none") {
         var blockArray_2 = [];
         var blocks = document.querySelectorAll(".block");
         blocks.forEach(function (item) {
@@ -35,7 +39,7 @@ document.addEventListener("keydown", function (e) {
             valueGenerator();
         }
     }
-    if (e.keyCode == arrowKey.ArrowDown) {
+    if (e.keyCode == arrowKey.ArrowDown && end.style.display == "none") {
         var blockArray_3 = [];
         var blocks = document.querySelectorAll(".block");
         blocks.forEach(function (item) {
@@ -48,7 +52,7 @@ document.addEventListener("keydown", function (e) {
             valueGenerator();
         }
     }
-    if (e.keyCode == arrowKey.ArrowRight) {
+    if (e.keyCode == arrowKey.ArrowRight && end.style.display == "none") {
         var blockArray_4 = [];
         var blocks = document.querySelectorAll(".block");
         blocks.forEach(function (item) {
@@ -61,6 +65,7 @@ document.addEventListener("keydown", function (e) {
             valueGenerator();
         }
     }
+    gameOverCheck();
 });
 document.addEventListener("DOMContentLoaded", function (e) {
     rows.forEach(function (item) {
@@ -117,13 +122,10 @@ function createCell() {
 }
 function moveLeft() {
     var rowsArray = rowsArrayXFunc();
-    console.log(rowsArray);
     var flag = 0;
     for (var i = 0; i < 4; i++) {
         for (var j = 0; j < 3; j++) {
             if ((rowsArray[i])[0] == "" && (rowsArray[i])[j + 1] != "") {
-                console.log((rowsArray[i])[j + 1]);
-                console.log((rows[i]).children[j + 1]);
                 var cell = ((rows[i]).children[j + 1]).children[0];
                 cell.remove();
                 ((rows[i]).children[0]).appendChild(cell);
@@ -136,8 +138,6 @@ function moveLeft() {
     for (var i = 0; i < 4; i++) {
         for (var j = 1; j < 3; j++) {
             if ((rowsArray[i])[1] == "" && (rowsArray[i])[j + 1] != "") {
-                console.log((rowsArray[i])[j + 1]);
-                console.log((rows[i]).children[j + 1]);
                 var cell = ((rows[i]).children[j + 1]).children[0];
                 cell.remove();
                 ((rows[i]).children[1]).appendChild(cell);
@@ -150,8 +150,6 @@ function moveLeft() {
     for (var i = 0; i < 4; i++) {
         for (var j = 2; j < 3; j++) {
             if ((rowsArray[i])[2] == "" && (rowsArray[i])[j + 1] != "") {
-                console.log((rowsArray[i])[j + 1]);
-                console.log((rows[i]).children[j + 1]);
                 var cell = ((rows[i]).children[j + 1]).children[0];
                 cell.remove();
                 ((rows[i]).children[2]).appendChild(cell);
@@ -285,7 +283,6 @@ function moveDown() {
     for (var i = 1; i > 0; i--) {
         for (var j = 0; j < 4; j++) {
             for (var k = 0; k >= 0; k--) {
-                console.log("len");
                 if (rowsArray[i][j] == "" && rowsArray[k][j] != "") {
                     var cell = ((rows[k]).children[j]).children[0];
                     cell.remove();
@@ -307,7 +304,6 @@ function leftInsertBlock() {
             if (rowsArray[i][j] == rowsArray[i][j + 1] && rowsArray[i][j] != "") {
                 var cell = ((rows[i]).children[j + 1]).children[0];
                 cell.remove();
-                console.log(((rows[i]).children[j]).children[0]);
                 var newCell = ((rows[i]).children[j]).children[0];
                 var number = parseInt(newCell.textContent);
                 newCell.textContent = (number * 2).toString();
@@ -428,4 +424,55 @@ function rowsArrayXFunc() {
         rowsArray.push(XLocation);
     }
     return rowsArray;
+}
+function gameOverCheck() {
+    var blockArray = [];
+    var blocks = document.querySelectorAll(".block");
+    blocks.forEach(function (item) {
+        blockArray.push(item);
+    });
+    var notEmpty = blockArray.every(function (item) { return item.children.length > 0; });
+    var rowsArray = rowsArrayXFunc();
+    var control = false;
+    for (var i = 0; i < 4; i++) {
+        if (control)
+            break;
+        for (var j = 0; j < 3; j++) {
+            if (rowsArray[i][j] == rowsArray[i][j + 1] && rowsArray[i][j] != "") {
+                console.log(rowsArray[i][j]);
+                control = true;
+                break;
+            }
+        }
+    }
+    if (!control) {
+        for (var i = 0; i < 4; i++) {
+            if (control)
+                break;
+            for (var j = 0; j < 3; j++) {
+                if (rowsArray[j][i] != "" && rowsArray[j][i] == rowsArray[j + 1][i]) {
+                    console.log(rowsArray[j][i]);
+                    control = true;
+                }
+            }
+        }
+    }
+    if (!control && notEmpty) {
+        end.style.display = "flex";
+        newGame();
+        restart.addEventListener("click", function () {
+            end.style.display = "none";
+        });
+    }
+}
+newGameButton.addEventListener("click", newGame);
+function newGame() {
+    point.textContent = "Point : ".concat(score.textContent);
+    score.textContent = "0";
+    var blocks = document.querySelectorAll(".block");
+    blocks.forEach(function (item) {
+        if (item.children.length > 0)
+            item.children[0].remove();
+    });
+    valueGenerator();
 }

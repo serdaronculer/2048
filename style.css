@@ -10,8 +10,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     flex-direction: column;
+    position: relative;
+    z-index: 1;
 }
 .grid{
     display: flex;
@@ -67,6 +69,12 @@ body {
 }
 .board{
     justify-content: space-between;
+    align-items: end;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 .board > div{
     width: 100%;
@@ -112,6 +120,52 @@ body {
     flex-direction: column;
     gap: 30px;
 }
-.new-game{
-    text-align: end;
+div.new-game{
+    text-align: center;
+    cursor:  pointer;
+    background-color: #b19274;
+    color: #fff;
+    line-height: 50px;
+    width : 150px;
+    height : 50px;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.end{
+    position: absolute;
+    width : 100%;
+    height : 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+.menu{
+    width: 400px;
+    height: 200px;
+    background: #fff;
+    border-radius: 5px; 
+    box-shadow: 5px 1px 18px 5px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+    align-items:center;
+}
+.point{
+    font-size: 24px;
+    color: #000;
+
+}
+.restart{
+    display: block;
+    font-size: 24px;
+    background-color: #b19274;
+    color: #fff;
+    text-align: center;
+    padding: 10px 60px;
+    text-decoration: none;
+    border-radius: 4px;
 }
