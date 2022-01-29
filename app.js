@@ -134,6 +134,7 @@ function moveLeft() {
             }
         }
     }
+    dasdasd;
     rowsArray = rowsArrayXFunc();
     for (var i = 0; i < 4; i++) {
         for (var j = 1; j < 3; j++) {
