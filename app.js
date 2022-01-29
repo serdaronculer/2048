@@ -123,120 +123,47 @@ function createCell() {
 function moveLeft() {
     var rowsArray = rowsArrayXFunc();
     var flag = 0;
-    for (var i = 0; i < 4; i++) {
-        for (var j = 0; j < 3; j++) {
-            if ((rowsArray[i])[0] == "" && (rowsArray[i])[j + 1] != "") {
-                var cell = ((rows[i]).children[j + 1]).children[0];
-                cell.remove();
-                ((rows[i]).children[0]).appendChild(cell);
-                rowsArray = rowsArrayXFunc();
-                flag++;
+    for (var a = 0; a < 3; a++) {
+        for (var i = 0; i < 4; i++) {
+            for (var j = a + 1; j < 4; j++) {
+                if ((rowsArray[i])[a] == "" && (rowsArray[i])[j] != "") {
+                    var cell = ((rows[i]).children[j]).children[0];
+                    cell.remove();
+                    ((rows[i]).children[a]).appendChild(cell);
+                    rowsArray = rowsArrayXFunc();
+                    flag++;
+                }
             }
         }
+        rowsArray = rowsArrayXFunc();
     }
-    dasdasd;
-    rowsArray = rowsArrayXFunc();
-    for (var i = 0; i < 4; i++) {
-        for (var j = 1; j < 3; j++) {
-            if ((rowsArray[i])[1] == "" && (rowsArray[i])[j + 1] != "") {
-                var cell = ((rows[i]).children[j + 1]).children[0];
-                cell.remove();
-                ((rows[i]).children[1]).appendChild(cell);
-                rowsArray = rowsArrayXFunc();
-                flag++;
-            }
-        }
-    }
-    rowsArray = rowsArrayXFunc();
-    for (var i = 0; i < 4; i++) {
-        for (var j = 2; j < 3; j++) {
-            if ((rowsArray[i])[2] == "" && (rowsArray[i])[j + 1] != "") {
-                var cell = ((rows[i]).children[j + 1]).children[0];
-                cell.remove();
-                ((rows[i]).children[2]).appendChild(cell);
-                rowsArray = rowsArrayXFunc();
-                flag++;
-            }
-        }
-    }
-    rowsArray = rowsArrayXFunc();
     return flag;
 }
 function moveRight() {
     var rowsArray = rowsArrayXFunc();
     var flag = 0;
-    for (var i = 0; i < 4; i++) {
-        for (var j = 3; j > 0; j--) {
-            if ((rowsArray[i])[3] == "" && (rowsArray[i])[j - 1] != "") {
-                var cell = ((rows[i]).children[j - 1]).children[0];
-                cell.remove();
-                ((rows[i]).children[3]).appendChild(cell);
-                rowsArray = rowsArrayXFunc();
-                flag++;
+    for (var a = 3; a > 0; a--) {
+        for (var i = 0; i < 4; i++) {
+            for (var j = a - 1; j >= 0; j--) {
+                if ((rowsArray[i])[a] == "" && (rowsArray[i])[j] != "") {
+                    var cell = ((rows[i]).children[j]).children[0];
+                    cell.remove();
+                    ((rows[i]).children[a]).appendChild(cell);
+                    rowsArray = rowsArrayXFunc();
+                    flag++;
+                }
             }
         }
+        rowsArray = rowsArrayXFunc();
     }
-    rowsArray = rowsArrayXFunc();
-    for (var i = 0; i < 4; i++) {
-        for (var j = 2; j > 0; j--) {
-            if ((rowsArray[i])[2] == "" && (rowsArray[i])[j - 1] != "") {
-                var cell = ((rows[i]).children[j - 1]).children[0];
-                cell.remove();
-                ((rows[i]).children[2]).appendChild(cell);
-                rowsArray = rowsArrayXFunc();
-                flag++;
-            }
-        }
-    }
-    rowsArray = rowsArrayXFunc();
-    for (var i = 0; i < 4; i++) {
-        for (var j = 0; j >= 0; j--) {
-            if ((rowsArray[i])[1] == "" && (rowsArray[i])[j] != "") {
-                var cell = ((rows[i]).children[j]).children[0];
-                cell.remove();
-                ((rows[i]).children[1]).appendChild(cell);
-                rowsArray = rowsArrayXFunc();
-                flag++;
-            }
-        }
-    }
-    rowsArray = rowsArrayXFunc();
     return flag;
 }
 function moveUp() {
     var flag = 0;
     var rowsArray = rowsArrayXFunc();
-    for (var i = 0; i < 1; i++) {
+    for (var i = 0; i < 4; i++) {
         for (var j = 0; j < 4; j++) {
-            for (var k = 0; k < 3; k++) {
-                if (rowsArray[i][j] == "" && rowsArray[k + 1][j] != "") {
-                    var cell = ((rows[k + 1]).children[j]).children[0];
-                    cell.remove();
-                    ((rows[i]).children[j]).appendChild(cell);
-                    rowsArray = rowsArrayXFunc();
-                    flag++;
-                }
-            }
-        }
-    }
-    rowsArray = rowsArrayXFunc();
-    for (var i = 1; i < 2; i++) {
-        for (var j = 0; j < 4; j++) {
-            for (var k = 1; k < 3; k++) {
-                if (rowsArray[i][j] == "" && rowsArray[k + 1][j] != "") {
-                    var cell = ((rows[k + 1]).children[j]).children[0];
-                    cell.remove();
-                    ((rows[i]).children[j]).appendChild(cell);
-                    rowsArray = rowsArrayXFunc();
-                    flag++;
-                }
-            }
-        }
-    }
-    rowsArray = rowsArrayXFunc();
-    for (var i = 2; i < 3; i++) {
-        for (var j = 0; j < 4; j++) {
-            for (var k = 3; k < 4; k++) {
+            for (var k = i + 1; k < 4; k++) {
                 if (rowsArray[i][j] == "" && rowsArray[k][j] != "") {
                     var cell = ((rows[k]).children[j]).children[0];
                     cell.remove();
@@ -246,16 +173,16 @@ function moveUp() {
                 }
             }
         }
+        rowsArray = rowsArrayXFunc();
     }
-    rowsArray = rowsArrayXFunc();
     return flag;
 }
 function moveDown() {
     var flag = 0;
     var rowsArray = rowsArrayXFunc();
-    for (var i = 3; i > 2; i--) {
+    for (var i = 3; i > 0; i--) {
         for (var j = 0; j < 4; j++) {
-            for (var k = 2; k >= 0; k--) {
+            for (var k = i - 1; k >= 0; k--) {
                 if (rowsArray[i][j] == "" && rowsArray[k][j] != "") {
                     var cell = ((rows[k]).children[j]).children[0];
                     cell.remove();
@@ -265,36 +192,8 @@ function moveDown() {
                 }
             }
         }
+        rowsArray = rowsArrayXFunc();
     }
-    rowsArray = rowsArrayXFunc();
-    for (var i = 2; i > 1; i--) {
-        for (var j = 0; j < 4; j++) {
-            for (var k = 1; k >= 0; k--) {
-                if (rowsArray[i][j] == "" && rowsArray[k][j] != "") {
-                    var cell = ((rows[k]).children[j]).children[0];
-                    cell.remove();
-                    ((rows[i]).children[j]).appendChild(cell);
-                    rowsArray = rowsArrayXFunc();
-                    flag++;
-                }
-            }
-        }
-    }
-    rowsArray = rowsArrayXFunc();
-    for (var i = 1; i > 0; i--) {
-        for (var j = 0; j < 4; j++) {
-            for (var k = 0; k >= 0; k--) {
-                if (rowsArray[i][j] == "" && rowsArray[k][j] != "") {
-                    var cell = ((rows[k]).children[j]).children[0];
-                    cell.remove();
-                    ((rows[i]).children[j]).appendChild(cell);
-                    rowsArray = rowsArrayXFunc();
-                    flag++;
-                }
-            }
-        }
-    }
-    rowsArray = rowsArrayXFunc();
     return flag;
 }
 function leftInsertBlock() {
