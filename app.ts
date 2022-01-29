@@ -160,166 +160,56 @@ function createCell(): HTMLDivElement {
    let rowsArray  = rowsArrayXFunc();
   
         let flag = 0;     
-        
-        for (let i = 0; i < 4; i++) {
-            for (let j = 0; j < 3; j++) {
-                if((rowsArray[i])[0]=="" && (rowsArray[i])[j+1]!=""){
-                    let cell =  ((rows[i]).children[j+1]).children[0];
-                    cell.remove();
-                    ((rows[i]).children[0]).appendChild(cell);   
-                    rowsArray  = rowsArrayXFunc();
-                    flag++;
-                }
-                
-                   
-            }
-            
-        }
 
-        rowsArray  = rowsArrayXFunc();
-        
-        for (let i = 0; i < 4; i++) {
-            for (let j = 1; j < 3; j++) {
-                if((rowsArray[i])[1]=="" && (rowsArray[i])[j+1]!=""){
-                    let cell =  ((rows[i]).children[j+1]).children[0];
-                    cell.remove();
-                    ((rows[i]).children[1]).appendChild(cell);   
-                    rowsArray  = rowsArrayXFunc();
-                    flag++;
-                }
-                
-                   
+        for(let a=0; a<3; a++){
+            for (let i = 0; i < 4; i++) {
+                for (let j = a+1; j < 4; j++) {
+                    if((rowsArray[i])[a]=="" && (rowsArray[i])[j]!=""){
+                        let cell =  ((rows[i]).children[j]).children[0];
+                        cell.remove();
+                        ((rows[i]).children[a]).appendChild(cell);   
+                        rowsArray  = rowsArrayXFunc();
+                        flag++;
+                    }          
+                }             
             }
-            
+            rowsArray  = rowsArrayXFunc();
         }
-
-        rowsArray  = rowsArrayXFunc();
-
-        for (let i = 0; i < 4; i++) {
-            for (let j = 2; j < 3; j++) {
-                if((rowsArray[i])[2]=="" && (rowsArray[i])[j+1]!=""){
-                    let cell =  ((rows[i]).children[j+1]).children[0];
-                    cell.remove();
-                    ((rows[i]).children[2]).appendChild(cell);   
-                    rowsArray  = rowsArrayXFunc();
-                    flag++;
-                }
-                
-                   
-            }
-            
-        }
-        
-        rowsArray  = rowsArrayXFunc();
         return flag;
  }
 
  function moveRight(){
     let rowsArray  = rowsArrayXFunc();
     let flag = 0;    
-    
-    for (let i = 0; i < 4; i++) {
-        for (let j = 3; j > 0; j--) {
-            if((rowsArray[i])[3]=="" && (rowsArray[i])[j-1]!=""){
-                let cell =  ((rows[i]).children[j-1]).children[0];
-                cell.remove();
-                ((rows[i]).children[3]).appendChild(cell);   
-                rowsArray  = rowsArrayXFunc();
-                flag++;
-            }
-               
+ 
+    for(let a=3; a>0; a--){
+        for (let i = 0; i < 4; i++) {
+            for (let j = a-1; j >= 0; j--) {
+                if((rowsArray[i])[a]=="" && (rowsArray[i])[j]!=""){
+                    let cell =  ((rows[i]).children[j]).children[0];
+                    cell.remove();
+                    ((rows[i]).children[a]).appendChild(cell);   
+                    rowsArray  = rowsArrayXFunc();
+                    flag++;
+                }
+            }  
         }
-        
+        rowsArray  = rowsArrayXFunc();
     }
-    rowsArray  = rowsArrayXFunc();
-
-    for (let i = 0; i < 4; i++) {
-        for (let j = 2; j > 0; j--) {
-            if((rowsArray[i])[2]=="" && (rowsArray[i])[j-1]!=""){
-                let cell =  ((rows[i]).children[j-1]).children[0];
-                cell.remove();
-                ((rows[i]).children[2]).appendChild(cell);   
-                rowsArray  = rowsArrayXFunc();
-                flag++;
-            }
-               
-        }
-        
-    }
-    rowsArray  = rowsArrayXFunc();
-
-    for (let i = 0; i < 4; i++) {
-        for (let j = 0; j >= 0; j--) {
-            if((rowsArray[i])[1]=="" && (rowsArray[i])[j]!=""){
-                let cell =  ((rows[i]).children[j]).children[0];
-                cell.remove();
-                ((rows[i]).children[1]).appendChild(cell);   
-                rowsArray  = rowsArrayXFunc();
-                flag++;
-            }
-               
-        }
-        
-    }
-    
-    rowsArray  = rowsArrayXFunc();
     return flag;
  }
-
-
 
 
 function moveUp(){
     let flag = 0;
     let rowsArray  = rowsArrayXFunc();
 
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 4; i++) {
         
         for (let j = 0; j <4; j++){
+    
+            for (let k = i+1; k < 4; k++) {
 
-            for (let k = 0; k < 3; k++) {
-               
-                if(rowsArray[i][j]=="" && rowsArray[k+1][j]!=""){
-
-                    let cell =  ((rows[k+1]).children[j]).children[0];
-                    cell.remove();
-                    ((rows[i]).children[j]).appendChild(cell);   
-                     rowsArray  = rowsArrayXFunc();
-                     flag++;
-                }
-                
-            }
-        }
-    }
-
-    rowsArray  = rowsArrayXFunc();
-
-    for (let i = 1; i < 2; i++) {
-        
-        for (let j = 0; j <4; j++){
-
-            for (let k = 1; k < 3; k++) {
-               
-                if(rowsArray[i][j]=="" && rowsArray[k+1][j]!=""){
-
-                    let cell =  ((rows[k+1]).children[j]).children[0];
-                    cell.remove();
-                    ((rows[i]).children[j]).appendChild(cell);   
-                     rowsArray  = rowsArrayXFunc();
-                     flag++;
-                }
-                
-            }
-        }
-    }
-    rowsArray  = rowsArrayXFunc();
-
-    for (let i = 2; i < 3; i++) {
-        
-        for (let j = 0; j <4; j++){
-
-            for (let k = 3; k < 4; k++) {
-               
                 if(rowsArray[i][j]=="" && rowsArray[k][j]!=""){
 
                     let cell =  ((rows[k]).children[j]).children[0];
@@ -328,12 +218,12 @@ function moveUp(){
                      rowsArray  = rowsArrayXFunc();
                      flag++;
                 }
-                
+           
             }
         }
+        rowsArray  = rowsArrayXFunc();
     }
-    
-    rowsArray  = rowsArrayXFunc();
+
    return flag;
 }
 
@@ -342,9 +232,10 @@ function moveDown(){
     let flag = 0;
     let rowsArray  = rowsArrayXFunc();
 
-    for (let i = 3; i > 2; i--) {
+    for (let i = 3; i > 0; i--) {
         for (let j = 0; j <4; j++){
-            for (let k = 2; k >= 0; k--) {
+            for (let k = i-1; k >= 0; k--) {
+                
                 if(rowsArray[i][j]=="" && rowsArray[k][j]!=""){
                     
                     let cell =  ((rows[k]).children[j]).children[0];
@@ -356,44 +247,9 @@ function moveDown(){
                 
             }
         }
+        rowsArray  = rowsArrayXFunc();
     }
-    rowsArray  = rowsArrayXFunc();
 
-    for (let i = 2; i > 1; i--) {
-        for (let j = 0; j <4; j++){
-            for (let k = 1; k >= 0; k--) {
-                if(rowsArray[i][j]=="" && rowsArray[k][j]!=""){
-                    
-                    let cell =  ((rows[k]).children[j]).children[0];
-                    cell.remove();
-                    ((rows[i]).children[j]).appendChild(cell);   
-                     rowsArray  = rowsArrayXFunc();
-                     flag++;
-                }
-                
-            }
-        }
-    }
-    rowsArray  = rowsArrayXFunc();
-
-    for (let i = 1; i > 0; i--) {
-        for (let j = 0; j <4; j++){
-            for (let k = 0; k >= 0; k--) {
-                
-                if(rowsArray[i][j]=="" && rowsArray[k][j]!=""){
-                    
-                    let cell =  ((rows[k]).children[j]).children[0];
-                    cell.remove();
-                    ((rows[i]).children[j]).appendChild(cell);   
-                     rowsArray  = rowsArrayXFunc();
-                     flag++;
-                }
-                
-            }
-        }
-    }
-    
-    rowsArray  = rowsArrayXFunc();
     return flag;
 }
 
