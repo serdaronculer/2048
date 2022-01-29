@@ -16,9 +16,9 @@ document.addEventListener("keydown", function (e) {
      let ok:boolean  = blockArray.every((item) => item.children.length>0);
 
      let flag = moveLeft();
-     leftInsertBlock();
+     let flagII = leftInsertBlock();
      
-     if(!ok && flag>0)
+     if(!ok && flag>0 || flagII>0)
      {
         valueGenerator();
      }
@@ -33,9 +33,9 @@ document.addEventListener("keydown", function (e) {
      let ok:boolean  = blockArray.every((item) => item.children.length>0);
 
     let flag = moveUp();
-     upInstertBlock();
+    let flagII =  upInstertBlock();
      
-     if(!ok && flag>0)
+     if(!ok && flag>0 || flagII>0)
      {
         valueGenerator();
      }
@@ -50,9 +50,9 @@ document.addEventListener("keydown", function (e) {
      let ok:boolean  = blockArray.every((item) => item.children.length>0);
 
      let flag = moveDown();
-     downInsertBlock();
+     let flagII = downInsertBlock();
      
-     if(!ok && flag>0)
+     if(!ok && flag>0 || flagII>0)
      {
         valueGenerator();
      }
@@ -67,9 +67,9 @@ document.addEventListener("keydown", function (e) {
      let ok:boolean  = blockArray.every((item) => item.children.length>0);
 
    let flag = moveRight();
-     rightInsertBlock();
+   let flagII = rightInsertBlock();
      
-     if(!ok && flag>0)
+     if(!ok && flag>0 || flagII>0)
      {
         valueGenerator();
      }
@@ -404,8 +404,8 @@ function moveDown(){
 
 
 function leftInsertBlock(){
+    let flagII = 0;
   let rowsArray = rowsArrayXFunc();
-
     for (let i = 0; i < 4; i++) {
 
         for (let j = 0; j < 3; j++) {
@@ -426,12 +426,13 @@ function leftInsertBlock(){
             let totalPoint = parseInt(score.textContent);
             totalPoint += number*2;
             score.textContent = totalPoint.toString();
+            flagII++;
           }
         }
         
     }
     moveLeft();
-
+    return flagII;
 }
 
 function cellColor(number,cell){
@@ -455,6 +456,7 @@ function cellColor(number,cell){
 }
 
 function rightInsertBlock(){
+    let flagII = 0;
     let rowsArray = rowsArrayXFunc();
 
     for (let i = 0; i < 4; i++) {
@@ -476,14 +478,17 @@ function rightInsertBlock(){
              let totalPoint = parseInt(score.textContent);
             totalPoint += number*2;
             score.textContent = totalPoint.toString();
+            flagII++;
           }
         }
         
     }
     moveRight();
+    return flagII;
 }
 
 function upInstertBlock(){
+    let flagII = 0;
     let rowsArray = rowsArrayXFunc();
 
     for (let i = 0; i <3; i++){
@@ -501,13 +506,17 @@ function upInstertBlock(){
                 let totalPoint = parseInt(score.textContent);
                 totalPoint += number*2;
                 score.textContent = totalPoint.toString();
+                flagII++;
             }
         }
-        moveUp();
+      
     }
+    moveUp();
+    return flagII;
 }
 
 function downInsertBlock(){
+    let flagII = 0;
     let rowsArray = rowsArrayXFunc();
 
     for (let i = 3; i > 0; i--){
@@ -525,10 +534,12 @@ function downInsertBlock(){
                 let totalPoint = parseInt(score.textContent);
                 totalPoint += number*2;
                 score.textContent = totalPoint.toString();
+                flagII++;
             }
         }
     }
     moveDown();
+    return flagII;
 }
 
 function rowsArrayXFunc(){

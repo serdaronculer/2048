@@ -17,8 +17,8 @@ document.addEventListener("keydown", function (e) {
         });
         var ok = blockArray_1.every(function (item) { return item.children.length > 0; });
         var flag = moveLeft();
-        leftInsertBlock();
-        if (!ok && flag > 0) {
+        var flagII = leftInsertBlock();
+        if (!ok && flag > 0 || flagII > 0) {
             valueGenerator();
         }
     }
@@ -30,8 +30,8 @@ document.addEventListener("keydown", function (e) {
         });
         var ok = blockArray_2.every(function (item) { return item.children.length > 0; });
         var flag = moveUp();
-        upInstertBlock();
-        if (!ok && flag > 0) {
+        var flagII = upInstertBlock();
+        if (!ok && flag > 0 || flagII > 0) {
             valueGenerator();
         }
     }
@@ -43,8 +43,8 @@ document.addEventListener("keydown", function (e) {
         });
         var ok = blockArray_3.every(function (item) { return item.children.length > 0; });
         var flag = moveDown();
-        downInsertBlock();
-        if (!ok && flag > 0) {
+        var flagII = downInsertBlock();
+        if (!ok && flag > 0 || flagII > 0) {
             valueGenerator();
         }
     }
@@ -56,8 +56,8 @@ document.addEventListener("keydown", function (e) {
         });
         var ok = blockArray_4.every(function (item) { return item.children.length > 0; });
         var flag = moveRight();
-        rightInsertBlock();
-        if (!ok && flag > 0) {
+        var flagII = rightInsertBlock();
+        if (!ok && flag > 0 || flagII > 0) {
             valueGenerator();
         }
     }
@@ -300,6 +300,7 @@ function moveDown() {
     return flag;
 }
 function leftInsertBlock() {
+    var flagII = 0;
     var rowsArray = rowsArrayXFunc();
     for (var i = 0; i < 4; i++) {
         for (var j = 0; j < 3; j++) {
@@ -315,10 +316,12 @@ function leftInsertBlock() {
                 var totalPoint = parseInt(score.textContent);
                 totalPoint += number * 2;
                 score.textContent = totalPoint.toString();
+                flagII++;
             }
         }
     }
     moveLeft();
+    return flagII;
 }
 function cellColor(number, cell) {
     switch (number * 2) {
@@ -345,6 +348,7 @@ function cellColor(number, cell) {
     }
 }
 function rightInsertBlock() {
+    var flagII = 0;
     var rowsArray = rowsArrayXFunc();
     for (var i = 0; i < 4; i++) {
         for (var j = 3; j > 0; j--) {
@@ -359,12 +363,15 @@ function rightInsertBlock() {
                 var totalPoint = parseInt(score.textContent);
                 totalPoint += number * 2;
                 score.textContent = totalPoint.toString();
+                flagII++;
             }
         }
     }
     moveRight();
+    return flagII;
 }
 function upInstertBlock() {
+    var flagII = 0;
     var rowsArray = rowsArrayXFunc();
     for (var i = 0; i < 3; i++) {
         for (var j = 0; j < 4; j++) {
@@ -379,12 +386,15 @@ function upInstertBlock() {
                 var totalPoint = parseInt(score.textContent);
                 totalPoint += number * 2;
                 score.textContent = totalPoint.toString();
+                flagII++;
             }
         }
-        moveUp();
     }
+    moveUp();
+    return flagII;
 }
 function downInsertBlock() {
+    var flagII = 0;
     var rowsArray = rowsArrayXFunc();
     for (var i = 3; i > 0; i--) {
         for (var j = 0; j < 4; j++) {
@@ -399,10 +409,12 @@ function downInsertBlock() {
                 var totalPoint = parseInt(score.textContent);
                 totalPoint += number * 2;
                 score.textContent = totalPoint.toString();
+                flagII++;
             }
         }
     }
     moveDown();
+    return flagII;
 }
 function rowsArrayXFunc() {
     var rowsArray = [];
