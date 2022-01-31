@@ -18,7 +18,7 @@ Here you see the desktop web view of the project.
 
 ## Link
 
-Live Site URL: [Live Site]()
+Live Site URL: [Live Site](https://serdaronculer.github.io/2048/)
 
 ## Built with
 
