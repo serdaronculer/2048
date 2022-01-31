@@ -1,2 +1,33 @@
 # 2048
- 
+
+
+
+## Table of contents
+
+- [Screenshot](#screenshot)
+- [Link](#link)
+- [Built with](#built-with)
+
+- [Author](#author)
+
+## Screenshot
+
+![](img/animation.gif)
+
+Here you see the desktop web view of the project.
+
+## Link
+
+Live Site URL: [Live Site]()
+
+## Built with
+
+- HTML5
+- CSS
+- Typescript
+
+
+
+## Author
+
+- LinkedIn - [Serdar ÖNCÜLER](https://www.linkedin.com/in/serdar-%C3%B6nc%C3%BCler-b88916184/)

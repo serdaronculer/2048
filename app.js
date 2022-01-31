@@ -84,6 +84,7 @@ function valueGenerator() {
             selectedBlock.appendChild(cell_1);
             setTimeout(function () {
                 cell_1.style.opacity = "1";
+                cell_1.style.transform = "scale(1)";
             }, 0.8);
             return "break";
         }
@@ -115,8 +116,9 @@ function createCell() {
     cell.style.background = "#EEE4DA";
     cell.style.fontWeight = "bold";
     cell.style.opacity = "0.2";
+    cell.style.transform = "scale(0.4)";
     cell.style.margin = "auto";
-    cell.style.transition = "1s opacity";
+    cell.style.transition = "opacity 1s, transform 1s";
     cell.innerHTML = randomNumber[index].toString();
     return cell;
 }
